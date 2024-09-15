@@ -9,9 +9,9 @@ def home():
     message = 'Top page'
     return render_template('index.html', message=message)
 
-@app.route('/controll/<path:contoroll_option>')
+@app.route('/controll_stage/<path:contoroll_option>')
 def controll(contoroll_option):
-    return render_template("controll.html")
+    return render_template("controll_stage.html")
 @app.route('/messure_osiro/<path:mes_osiro_option>')
 def messure_osiro(mes_osiro_option):
     return render_template("mes_osiro.html")
