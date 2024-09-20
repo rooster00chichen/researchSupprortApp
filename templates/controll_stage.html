@@ -11,7 +11,10 @@
 
 <body>
   <h1>This is controll_stage.</h1>
-  <div class=""></div>
+  <form action="{{url_for("controll_stage",contoroll_stage_option="home")}}" method="POST" novalidate="novalidate">
+    <button class="button-1" name="action" value="up">↑</button>
+    <button class="button-1" name="action" value="down">↓</button>
+  </form>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
 </body>
 
