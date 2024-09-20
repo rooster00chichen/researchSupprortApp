@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App</title>
+    <title>home</title>
+    <link rel="stylesheet" href="{{ url_for("static",filename="defalut.css") }}">
 </head>
 <body>
     <h1>{{ message }}</h1>
     <h2>
     <ul>
-      <li><a href="/controll_stage/home">controll_stage</a></li>
-      <li><a href="/messure_osiro/home">messure_osiro</a></li>
+      <li><a href="{{ url_for("controll_stage",contoroll_stage_option="home") }}">controll_stage</a></li>
+      <li><a href="{{ url_for("messure_osiro",mes_osiro_option="home") }}">messure_osiro</a></li>
       <li>Peter Conrad</li>
       <li>Edgar Mitchell</li>
       <li>Alan Shepard</li>
     </ul>
     </h2>
+    <h2><a href="/dev/home">dev用ページ</a></h2>
 
 </body>
 </html>

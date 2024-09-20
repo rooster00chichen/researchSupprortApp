@@ -4,13 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>オシロ測定</title>
-  <link rel="stylesheet" href="{{ url_for("static",filename="defalut.css" ) }}">
+  <title>Flask App</title>
 </head>
 
 <body>
-  <h1>This is messure_osiro.</h1>
+  <h1>dev用検証ページ</h1>
+  <h2>
+    {{error}}
+  </h2>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
+
 </body>
 
 </html>

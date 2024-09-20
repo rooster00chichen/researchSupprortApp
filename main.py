@@ -4,21 +4,25 @@ from flask import *
 app = Flask(__name__)
 
 # ルートページのルーティング
-@app.route('/')
+@app.route('/',endpoint="home")
 def home():
     message = 'Top page'
     return render_template('index.html', message=message)
 
-@app.route('/controll_stage/<path:contoroll_option>')
-def controll(contoroll_option):
+@app.route('/controll_stage/<path:contoroll_stage_option>',endpoint="controll_stage")
+def controll_stage(contoroll_stage_option):
     return render_template("controll_stage.html")
-@app.route('/messure_osiro/<path:mes_osiro_option>')
+@app.route('/messure_osiro/<path:mes_osiro_option>',endpoint="messure_osiro")
 def messure_osiro(mes_osiro_option):
     return render_template("mes_osiro.html")
 
 @app.errorhandler(404)
 def take_care_404(error):
     return render_template("404.html",error=error)
+
+@app.route("/dev/<path:dev_path>")
+def dev(dev_path):
+    return render_template("dev.html")
 
 # アプリの実行
 if __name__ == '__main__':
