@@ -1,7 +1,12 @@
 from flask import *
 
+from researchSupprortApp.api import api
+
 # Flaskインスタンスの作成
 app = Flask(__name__)
+
+#apiサーバーの作成
+app.register_blueprint(api)
 
 # ルートページのルーティング
 @app.route('/',endpoint="home")
