@@ -5,16 +5,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>stage変更</title>
-  <link rel="stylesheet" href="{{ url_for( "static",filename="defalut.css" ) }}">
-
+  <link rel="stylesheet" href="{{ url_for( 'static',filename='defalut.css' ) }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='defalut.js') }}"></script>
+  <script>
+    async function cheak_status() {
+      //　鯖から状態をもらってくる
+      const status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "cheak" }))
+      // ユーザー情報をHTMLに出力
+      const status_text = document.getElementById('status');
+      status_text.textContent = `now:${status.is_op}`;
+    }
+    async function ct_stage(type) {
+        //　鯖から状態をもらってくる
+        const ct_status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "controll", type: type }))
+        //一応確認
+        console.log(ct_status)
+      }
+  </script>
 </head>
 
 <body>
   <h1>This is controll_stage.</h1>
-  <form action="{{url_for("controll_stage",contoroll_stage_option="home")}}" method="POST" novalidate="novalidate">
-    <button class="button-1" name="action" value="up">↑</button>
-    <button class="button-1" name="action" value="down">↓</button>
-  </form>
+  <button class="button-status-cheak" onclick="cheak_status()">状態確認</button>
+  
+  <div id="status"></div>
+  <button onclick='ct_stage("up")' class="button-ct-stage button-status-color">↑</button>
+  <button onclick='ct_stage("down")' class="button-ct-stage button-status-color">↓</button>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
 </body>
 

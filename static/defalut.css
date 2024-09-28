@@ -1,4 +1,4 @@
-.button-1 {
+.button-ct-stage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
   font-size: 1em;
 }
 
-.button-1::after {
+.button-ct-stage::after {
   transform: rotate(45deg);
   width: 5px;
   height: 5px;

@@ -14,14 +14,9 @@ def home():
     message = 'Top page'
     return render_template('index.html', message=message)
 
-@app.route('/controll_stage/<path:contoroll_stage_option>',endpoint="controll_stage", methods=["GET","POST"])
+@app.route('/controll_stage/<path:contoroll_stage_option>',endpoint="controll_stage", methods=["GET"])
 def controll_stage(contoroll_stage_option):
-    if request.method == "POST":
-        do_val=request.form["action"]
-        app.logger.debug(do_val)
-        return redirect(url_for("controll_stage",contoroll_stage_option="home"))
-    else:
-        return render_template("controll_stage.html")
+    return render_template("controll_stage.html")
 @app.route('/messure_osiro/<path:mes_osiro_option>',endpoint="messure_osiro")
 def messure_osiro(mes_osiro_option):
     return render_template("mes_osiro.html")

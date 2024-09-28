@@ -2,18 +2,22 @@ import pyvisa as visa
 from time import sleep
 
 class controll_stage:
+  is_op=True
   def __init__(self) -> None:
     # GPIB接続設定
     rm = visa.ResourceManager('@py')
-    self.stage = rm.open_resource("GPIB0::8::INSTR")
-    # initialize
-    n = 201  # x movement for n times
-    # move to -point
-    self.stage.write("D:1S10F1000R10")
-    sleep(500*10**-3)
-    print("can operate stage" if self.stage.read() == "OK" else "test3")
-    self.changeOfPosition = 0
-    self.move_val=2000
+    try:
+      self.stage = rm.open_resource("GPIB0::8::INSTR")
+      # initialize
+      n = 201  # x movement for n times
+      # move to -point
+      self.stage.write("D:1S10F1000R10")
+      sleep(500*10**-3)
+      print("can operate stage" if self.stage.read() == "OK" else "test3")
+      self.changeOfPosition = 0
+      self.move_val=2000
+    except:
+      self.is_op=False
   
 
   def move_signal_submit(self,move_val):
