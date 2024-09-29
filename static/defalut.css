@@ -5,18 +5,11 @@
   width: 250px;
   margin: 0 auto;
   padding: .9em 2em;
-  border: 1px solid #2589d0;
+  border: 1px solid #C8C8C8;
   border-radius: 25px;
   background-color: #fff;
-  color: #2589d0;
+  color: #c8c8c8;
   font-size: 1em;
-}
-
-.button-ct-stage::after {
-  transform: rotate(45deg);
-  width: 5px;
-  height: 5px;
-  margin-left: 10px;
-  border-top: 2px solid #2589d0;
-  border-right: 2px solid #2589d0;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

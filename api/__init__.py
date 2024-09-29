@@ -9,13 +9,16 @@ def index():
 
 @api.post("/controll_stage/op",endpoint="ct_stage_op")
 def cs_cheak():
+  is_op=str(op.is_op)
   if request.json['mode']=="cheak":
-    is_op=str(op.is_op)
     return jsonify({"is_op":is_op}),201
   elif request.json['mode']=="controll":
-    is_op=str(op.is_op)
+    if op.is_op:
+      return jsonify({"is_op":is_op,})
     ct_type=request.json['type']
     return jsonify({"is_op":is_op,"type":ct_type})
+  elif request.json['mode']=="dev":
+    return jsonify({"is_op":'True',})
   else:
     return jsonify({"aisatu":"hello"}),201
 

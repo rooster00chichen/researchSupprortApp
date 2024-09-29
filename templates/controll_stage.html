@@ -7,19 +7,23 @@
   <title>stage変更</title>
   <link rel="stylesheet" href="{{ url_for( 'static',filename='defalut.css' ) }}">
   <script type="text/javascript" src="{{ url_for('static', filename='defalut.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='controll_stage.js') }}"></script>
   <script>
     async function cheak_status() {
       //　鯖から状態をもらってくる
-      const status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "cheak" }))
-      // ユーザー情報をHTMLに出力
-      const status_text = document.getElementById('status');
-      status_text.textContent = `now:${status.is_op}`;
+      const status_cheak = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "dev" }))
+      is_op=status_cheak.is_op
+      change_status_message(is_op)
     }
     async function ct_stage(type) {
-        //　鯖から状態をもらってくる
-        const ct_status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "controll", type: type }))
-        //一応確認
-        console.log(ct_status)
+      //先にボタンを無効化
+      change_status_message_disabled()
+      //　鯖にデータを渡す
+      const ct_status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "controll", type: type }))
+      is_op=ct_status.is_op
+      //必要な処理を
+      change_status_message(is_op)
+      console.log(ct_status)
       }
   </script>
 </head>
@@ -27,10 +31,9 @@
 <body>
   <h1>This is controll_stage.</h1>
   <button class="button-status-cheak" onclick="cheak_status()">状態確認</button>
-  
-  <div id="status"></div>
-  <button onclick='ct_stage("up")' class="button-ct-stage button-status-color">↑</button>
-  <button onclick='ct_stage("down")' class="button-ct-stage button-status-color">↓</button>
+  <div id="status"> </div>
+  <button onclick='ct_stage("up")' disabled class="button-ct-stage button-status-color">↑</button>
+  <button onclick='ct_stage("down")' disabled class="button-ct-stage button-status-color">↓</button>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
 </body>
 
