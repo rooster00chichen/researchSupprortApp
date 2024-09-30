@@ -1,6 +1,6 @@
 from researchSupprortApp.controll_stage import *
 
-class Operate:
+class Operate_stage:
   def __init__(self) -> None:
     self.op=Controll_stage()
     self.move_pos_val=2000
