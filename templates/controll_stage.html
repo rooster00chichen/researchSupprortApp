@@ -11,7 +11,8 @@
   <script>
     async function cheak_status() {
       //　鯖から状態をもらってくる
-      const status_cheak = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "dev" }))
+      const status_cheak = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "cheak" }))
+      console.log(status_cheak)
       is_op=status_cheak.is_op
       change_status_message(is_op)
     }
