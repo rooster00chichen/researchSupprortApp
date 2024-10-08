@@ -1,7 +1,7 @@
 ## ラズパイでのgpibの対応のさせ方
 参考　https://zenn.dev/hroabe/articles/ceccb8ce114372
 ### 1.カーネルビルド
-公式サイト（https://www.raspberrypi.com/documentation/computers/linux_kernel.html）を参考に、使用するモデルに合わせてInstall the kernelの項目までコマンドを実行する。
+公式サイト（ https://www.raspberrypi.com/documentation/computers/linux_kernel.html ）を参考に、使用するモデルに合わせてInstall the kernelの項目までコマンドを実行する。
 ### 2.Linux-GPIB (GPIBドライバー)のビルド&インストール
 svnのインストール
 ```svn install
