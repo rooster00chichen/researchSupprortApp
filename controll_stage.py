@@ -15,9 +15,17 @@ class Controll_stage:
       print("can operate stage" if self.stage.read() == "OK" else "test3")
       self.changeOfPosition = 0
       self.is_op=True
+      self.is_shake=False
     except:
       self.is_op=False
   
+  def cheak_flag(self):
+    self.stage.write("!:")
+    judge=self.stage.read()
+    if judge == "R":
+      self.is_op=True
+    else:
+      self.is_op=False
 
   def move_signal_submit(self,move_val):
     if move_val >= 0:
@@ -44,3 +52,10 @@ class Controll_stage:
     if self.changeOfPosition != 0:
       self.changeOfPosition += self.move_signal_submit(self.changeOfPosition*-1)
     return self.changeOfPosition
+
+  def move_shake_pos(self,move_val = 100):
+    print("start shake")
+    while self.is_shake:
+      a=self.move_signal_submit(abs(move_val))
+      b=self.move_signal_submit(-1*abs(move_val))
+    print("end shake")

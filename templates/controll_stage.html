@@ -11,9 +11,9 @@
   <script>
     async function cheak_status() {
       //　鯖から状態をもらってくる
-      const status_cheak = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "dev" }))
+      const status_cheak = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "cheak" }))
       console.log(status_cheak)
-      is_op=status_cheak.is_op
+      is_op = status_cheak.is_op
       change_status_message(is_op)
     }
     async function ct_stage(type) {
@@ -21,11 +21,24 @@
       change_status_message_disabled()
       //　鯖にデータを渡す
       const ct_status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "controll", type: type }))
-      is_op=ct_status.is_op
+      const is_op = ct_status.is_op
       //必要な処理を
       change_status_message(is_op)
       console.log(ct_status)
+    }
+
+    async function shake(type) {
+      change_status_message_disabled()
+      const a = document.getElementsByClassName("button_shake_color")
+      if (type == "start") {
+        a[0].disabled = null;
+        a[1].disabled = null;
       }
+      const status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "shake", type: type }))
+      const is_op = status.is_op
+      change_status_message(is_op)
+      console.log(status)
+    }
   </script>
 </head>
 
@@ -35,6 +48,8 @@
   <div id="status"> </div>
   <button onclick='ct_stage("up")' disabled class="button-ct-stage button-status-color">↑</button>
   <button onclick='ct_stage("down")' disabled class="button-ct-stage button-status-color">↓</button>
+  <button onclick='shake("start")' disabled class="button-status-color button_shake_color">シェイク開始 </button>
+  <button onclick='shake("stop")' disabled class="button-status-color button_shake_color">シェイク終了</button>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
 </body>
 
