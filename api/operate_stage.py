@@ -27,6 +27,7 @@ class Operate_stage:
     self.op.move_shake_pos()
 
   def stop_shake_pos(self):
+    print("end")
     self.op.is_shake=False
     self.op.is_op=True
 

@@ -10,8 +10,8 @@ class Controll_stage:
       # initialize
       n = 201  # x movement for n times
       # move to -point
-      self.stage.write("D:1S10F1000R10")
-      sleep(500*10**-3)
+      self.stage.write("D:1S100F1000R10")
+      sleep(50*10**-3)
       print("can operate stage" if self.stage.read() == "OK" else "test3")
       self.changeOfPosition = 0
       self.is_op=True
@@ -55,9 +55,10 @@ class Controll_stage:
 
   def move_shake_pos(self,move_val = 20000):
     print("start shake")
-    start = self.move_signal_submit(abs(move_val)/2*-1)
+    start = self.move_signal_submit(-1*abs(move_val)//2)
     while self.is_shake:
       a=self.move_signal_submit(abs(move_val))
       b=self.move_signal_submit(-1*abs(move_val))
-    stop =  start = self.move_signal_submit(abs(move_val)/2)
+    stop = self.move_signal_submit(abs(move_val)//2)
+    print(str(start+a+b+stop))
     print("end shake")
