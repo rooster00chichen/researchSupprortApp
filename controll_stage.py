@@ -27,11 +27,11 @@ class Controll_stage:
     else:
       self.is_op=False
 
-  def move_signal_submit(self,move_val):
+  def move_signal_submit(self,move_val,target=1):
     if move_val >= 0:
-        sig = "M:1+P"+str(abs(move_val))
+        sig = "M:"+str(target)+"+P"+str(abs(move_val))
     elif move_val <= 0:
-        sig = "M:1-P"+str(abs(move_val))
+        sig = "M:"+str(target)+"-P"+str(abs(move_val))
     self.stage.write(sig)
     print("send the request" if self.stage.read() == "OK" else "test1")
     self.stage.write("G:")
@@ -53,9 +53,11 @@ class Controll_stage:
       self.changeOfPosition += self.move_signal_submit(self.changeOfPosition*-1)
     return self.changeOfPosition
 
-  def move_shake_pos(self,move_val = 100):
+  def move_shake_pos(self,move_val = 20000):
     print("start shake")
+    start = self.move_signal_submit(abs(move_val)/2*-1)
     while self.is_shake:
       a=self.move_signal_submit(abs(move_val))
       b=self.move_signal_submit(-1*abs(move_val))
+    stop =  start = self.move_signal_submit(abs(move_val)/2)
     print("end shake")

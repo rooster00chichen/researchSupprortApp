@@ -30,10 +30,6 @@
     async function shake(type) {
       change_status_message_disabled()
       const a = document.getElementsByClassName("button_shake_color")
-      if (type == "start") {
-        a[0].disabled = null;
-        a[1].disabled = null;
-      }
       const status = await post_json('{{url_for("api.ct_stage_op")}}', JSON.stringify({ mode: "shake", type: type }))
       const is_op = status.is_op
       change_status_message(is_op)
@@ -49,7 +45,7 @@
   <button onclick='ct_stage("up")' disabled class="button-ct-stage button-status-color">↑</button>
   <button onclick='ct_stage("down")' disabled class="button-ct-stage button-status-color">↓</button>
   <button onclick='shake("start")' disabled class="button-status-color button_shake_color">シェイク開始 </button>
-  <button onclick='shake("stop")' disabled class="button-status-color button_shake_color">シェイク終了</button>
+  <button onclick='shake("stop")' class="button_shake_color">シェイク終了</button>
   <h2><a href={{ url_for('home') }}>homeに戻る</a></h2>
 </body>
 
